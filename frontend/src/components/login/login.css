@@ -1,0 +1,37 @@
+.field-container{
+    color:white;
+}
+label{
+    margin:10px;
+}
+.input-field{
+    width:95%;
+    margin:10px;
+    outline:none;
+    border:none;
+    background: transparent;
+    border-bottom: 2px solid green;
+    caret-color: white;
+    color:white;
+}
+.input-field:hover{
+    margin:10px;
+    outline:none;
+    border:none;
+    background: transparent;
+    border-bottom: 2px solid blue;
+}
+.btn-login{
+    text-align:center;
+    color:white;
+    font-size:16px;
+    width:95%;
+    margin:10px;
+    background-color: blue;
+    padding:10px;
+    border:none;
+}
+.user-not-found{
+    color:red;
+    margin:10px;
+}
