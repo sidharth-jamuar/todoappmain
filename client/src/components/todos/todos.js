@@ -65,12 +65,14 @@ class Todos extends React.Component{
     }
   
     else{
-        return <div className="error-todo">No Todos found for this bucket.
-        Please use the full bucketname</div>
+        return <div className="error-todo">No Todos found.
+        Please use the full bucketname, or 
+        go to my buckets for you buckets or create a new todo.</div>
     }
     }
     renderBuckets=()=>{
         if(this.props.todos && this.props.todos.length >0){
+
          const Buckets= this.props.todos.map((todo,i)=>{
                return (
                    <div className="todo-list" key={i} style={{cursor:"pointer",borderBottom:"1px solid white"}}>
@@ -87,6 +89,9 @@ class Todos extends React.Component{
       const bucket=new Set(Buckets);
 
        return Array.from(bucket)
+    }
+    else{
+        return <div className="error-todo">No buckets created</div>
     }
 }
 
