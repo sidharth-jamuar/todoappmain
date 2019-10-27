@@ -8,7 +8,7 @@ export const signup=(data,userExists)=>{
         userExists(res.data);
        }
        else{
-           
+           userExists("")
        }
         }
         catch{
@@ -30,5 +30,11 @@ export const login=(data,history,userNotFound)=>{
         else{
             userNotFound("User not Found")
         }
+    }
+}
+export const logout=()=>{
+    return{
+        type:"LOGOUT_USER",
+        payload:undefined
     }
 }

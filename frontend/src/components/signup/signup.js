@@ -11,8 +11,8 @@ class Signup extends React.Component{
             ConfirmPassword:"",
             errorPassword:"",
             errorUsername:"",
-            userExists:""
-            
+            userExists:"",
+            signUpDone:""
         }
     }
     handleChange=(value,name)=>{
@@ -23,8 +23,16 @@ class Signup extends React.Component{
         })
     }
     userExists=(errorData)=>{
+        if(errorData){
         this.setState({userExists:errorData});
-        setTimeout(()=>{this.setState({userExists:""})},2000)
+        }
+        console.log(errorData)
+        if(errorData===""){
+        this.setState({
+            signUpDone:"All set.Proceed to Login."
+        })
+    }
+        setTimeout(()=>{this.setState({userExists:"",signUpDone:""})},3000)
     }
     onSubmit=(e)=>{
         e.preventDefault();
@@ -81,6 +89,7 @@ class Signup extends React.Component{
                 <button type="submit" className="btn-login" id="btn-signup">Signup</button>
                 </form>
                 <div className="user-exists-tooltip">{this.state.userExists}</div>
+                <div className="user-exists-tooltip" style={{color:"green"}}>{this.state.signUpDone}</div>
             </React.Fragment>
         )
     }

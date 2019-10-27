@@ -1,0 +1,17 @@
+.header-container{
+    height:60px;
+    margin:0px 10px;
+    background-color: rgba(0,0,0,0.8);
+    display:flex;
+}
+.logo{
+    color:white;
+    font-size:24px;
+    padding:10px;
+    cursor:pointer;
+}
+.logout{
+    color:white;
+    padding:15px;
+    cursor:pointer;
+}

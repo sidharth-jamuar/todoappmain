@@ -30,6 +30,7 @@ label{
     background-color: blue;
     padding:10px;
     border:none;
+    cursor:pointer;
 }
 .user-not-found{
     color:red;
