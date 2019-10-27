@@ -71,7 +71,7 @@ class Todos extends React.Component{
     }
     renderBuckets=()=>{
         if(this.props.todos && this.props.todos.length >0){
-           return this.props.todos.map((todo,i)=>{
+         const Buckets= this.props.todos.map((todo,i)=>{
                return (
                    <div className="todo-list" key={i} style={{cursor:"pointer",borderBottom:"1px solid white"}}>
                        <div className="todo-data" onClick={e=>{
@@ -82,15 +82,20 @@ class Todos extends React.Component{
                        ><span>Bucket Name:</span>{todo.Bucket}</div>
                    </div>
                )
-           })
-        }
+
+       })
+      const bucket=new Set(Buckets);
+
+       return Array.from(bucket)
     }
+}
+
     showMyBuckets=()=>{
         this.setState((prevstate)=>{
             return{
             showCreateTodo:false,
             showMyTodos:false,
-            showMyBuckets:!prevstate.showMyBuckets
+            showMyBuckets:true
             }
         })
     }
@@ -111,7 +116,7 @@ class Todos extends React.Component{
     showMyTodos=()=>{
         this.setState((prevstate)=>{
             return{
-            showMyTodos:!prevstate.showMyTodos,
+            showMyTodos:true,
             showCreateTodo:false,
             showMyBuckets:false,
             search:""
@@ -121,7 +126,7 @@ class Todos extends React.Component{
     showCreateTodo=()=>{
         this.setState((prevstate)=>{
             return{
-            showCreateTodo:!prevstate.showCreateTodo,
+            showCreateTodo:true,
             showMyTodos:false,
             showMyBuckets:false
             }
