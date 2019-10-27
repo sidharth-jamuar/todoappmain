@@ -3,7 +3,7 @@ export const signup=(data,userExists)=>{
     console.log(data)
     return async dispatch=>{
         try{
-        const res=await axios.post("http://localhost:3004/api/signup",data);
+        const res=await axios.post("/api/signup",data);
        if(typeof(res.data)==="string"){
         userExists(res.data);
        }
@@ -18,7 +18,7 @@ export const signup=(data,userExists)=>{
 }
 export const login=(data,history,userNotFound)=>{
     return async dispatch=>{
-        const res=await axios.post("http://localhost:3004/api/login",data)
+        const res=await axios.post("/api/login",data)
         console.log(res.data)
         if(Object.keys(res.data).length >0){
             dispatch({
