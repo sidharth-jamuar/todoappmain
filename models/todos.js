@@ -7,7 +7,8 @@ const todoSchema=new Schema({
     Id:String,
     Category:String,
     Description:String,
-    Done:{type:Boolean,default:false}
+    Done:{type:Boolean,default:false},
+    Bucket:{type:String,default:"No Bucket assigned"}
 })
 const Todo=mongoose.model('todo',todoSchema)
 

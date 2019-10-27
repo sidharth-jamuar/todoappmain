@@ -30,6 +30,23 @@
     color:white;
     padding:10px;
 }
+.search-container{
+    margin-top:10px;
+color:royalblue;
+
+}
+.error-todo{
+    margin:10px;
+    padding:10px;
+    color:white;
+
+}
+.search{
+    outline:none;
+    border:none;
+    padding:10px;
+    margin:10px;
+}
 .btn{
     margin:10px;
     padding:10px;

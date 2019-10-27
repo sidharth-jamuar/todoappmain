@@ -5,7 +5,8 @@ exports.addTodo=(req,res)=>{
         Title:req.body.Title,
     Creator:req.body.Creator,
     Category:req.body.Category,
-    Description:req.body.Description
+    Description:req.body.Description,
+    Bucket:req.body.Bucket
     })
     todo.save().then(result=>{
         Todo.find({Creator:req.body.Creator}).then(todos=>{
@@ -13,10 +14,22 @@ exports.addTodo=(req,res)=>{
         })
     })
 }
+exports.editTodo=(req,res)=>{
+    console.log(req.body)
+    Todo.findOneAndUpdate({_id:req.body.id},{$set:{Title:req.body.Title,Category:req.body.Category
+    ,Description:req.body.Description,Bucket:req.body.Bucket}},{new:true})
+    .then(result=>{
+        Todo.find({Creator:req.body.Creator})
+        .then(todos=>{
+            
+            res.send(todos)
+        })
+    })
+}
 exports.fetchMyTodos=(req,res)=>{
     Todo.find({Creator:req.query.Creator})
     .then(todos=>{
-        console.log(todos);
+        
         res.send(todos)
     })
 }

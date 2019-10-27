@@ -1,14 +1,33 @@
 import React from "react"
 import {withRouter} from "react-router-dom";
 import {connect} from 'react-redux';
-import {addTodo} from "../../actions/todo"
+import {addTodo,editTodo} from "../../actions/todo"
 class CreateTodo extends React.Component{
     constructor(props){
         super(props);
+       
         this.state={
-            Category:"",
+            Category: "",
             Description:"",
-            Title:"",
+            Title: "",
+            Bucket:"",
+            data:this.props.data
+        }
+    }
+    componentDidUpdate(prevProps,prevState){
+  
+        if(prevProps.todo!==this.props.todo && this.props.todo !==null){
+            this.setState({
+                Category:this.props.todo.Category,
+                Description:this.props.todo.Description,
+                Title:this.props.todo.Title,
+              
+            })
+        }
+        if(prevProps.data!==this.props.data){
+            this.setState({
+                data:this.props.data
+            })
         }
     }
     handleChange=(value,name)=>{
@@ -18,11 +37,27 @@ class CreateTodo extends React.Component{
             }
         })
     }
+    handleDatalistChange=(e)=>{
+        this.setState({
+            Bucket:e.target.value
+        })
+    }
     onSubmit=(e)=>{
         e.preventDefault();
-     const {Title,Category,Description}=this.state;
+    let {Title,Category,Description,Bucket}=this.state;
      const Creator=this.props.user.Username;
-        this.props.addTodo({Title,Category,Description,Creator},this.props.closeCreateTodo)
+     if(Bucket===""){
+        Bucket="Individual"
+     }
+     if(this.props.todo===null){
+        this.props.addTodo({Title,Category,Description,Creator,Bucket},this.props.closeCreateTodo)
+     }
+     else{
+      
+         this.props.editTodo({id:this.props.todo._id,Title,Category,Description,Creator,Bucket},this.props.closeCreateTodo, this.props.activeTodoDone)
+        
+     }
+    
     }
   
     renderTodoForm=()=>{
@@ -41,10 +76,12 @@ class CreateTodo extends React.Component{
                 </div>
             )
            }
+         
         })
        
     }
     render(){
+      
         const styleobj={
             color:"white",
            textAlign:"right",
@@ -58,8 +95,19 @@ class CreateTodo extends React.Component{
                     <div style={styleobj} onClick={e=>{this.props.closeCreateTodo()}}>X</div>
                     <div>
                 {this.renderTodoForm()}
+                <div className="field-container">
+                    <label>Bucket:</label>
+                <input type="text" className="input-field" list="data" onChange={this.handleDatalistChange} />
+
+               <datalist id="data">
+       {this.state.data.map((item, key) =>
+         <option key={key} value={item} />
+  )}
+</datalist>
+</div>
                 </div>
-                <button type="submit" className="btn-login">Create Todo</button>
+                {this.props.todo===null?<button type="submit" className="btn-login">Create Todo</button>
+                :<button type="submit" className="btn-login">Edit Todo</button>}
                 </form>
                 
             </React.Fragment>
@@ -67,4 +115,4 @@ class CreateTodo extends React.Component{
     }
 }
 
-export default withRouter(connect(null,{addTodo})(CreateTodo));
+export default withRouter(connect(null,{addTodo,editTodo})(CreateTodo));

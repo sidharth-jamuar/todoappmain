@@ -12,6 +12,19 @@ export const addTodo=(data,closeCreateTodo)=>{
         closeCreateTodo();
     }
 }
+export const editTodo=(data,closeCreateTodo,activeTodoDone)=>{
+    return async dispatch=>{
+        const res=await axios.put("http://localhost:3004/api/editTodo",data)
+        console.log(res.data)
+        dispatch({
+            type:FETCH_MY_TODOS,
+            payload:res.data
+        })
+        closeCreateTodo();
+        activeTodoDone();
+        
+    }
+}
 export const fetchMyTodos=(data)=>{
     return async dispatch=>{
         const res=await axios.get(`http://localhost:3004/api/fetchMyTodos?Creator=${data.Creator}`)
